@@ -7,6 +7,9 @@ function Sidebar() {
       <LinkButton link="/" color="pink">
         Villas
       </LinkButton>
+      <LinkButton link="/locations" color="pink">
+        Locations
+      </LinkButton>
       <LinkButton link="/amenities" color="pink">
         Amenities
       </LinkButton>

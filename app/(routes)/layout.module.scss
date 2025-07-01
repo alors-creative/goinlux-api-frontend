@@ -1,6 +1,6 @@
 .main {
   display: grid;
-  grid-template-columns: 1.5fr 8.5fr;
+  grid-template-columns: max-content 1fr;
 
   section {
     padding: 2rem;

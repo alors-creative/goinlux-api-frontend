@@ -1,9 +1,9 @@
 .sidebar {
   border-right: 0.1rem solid $purple;
   height: 100lvh;
-  padding: 2rem;
+  padding: 4rem 4rem 4rem 2rem;
 
-  & > :first-child {
+  & > * {
     margin-bottom: 2rem;
   }
 }
