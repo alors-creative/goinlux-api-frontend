@@ -1,9 +1,9 @@
 // client-component.tsx
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { initialFormState } from '@tanstack/react-form/nextjs';
-// Notice the import is from `react-form`, not `react-form/nextjs`
+import { useRouter } from 'next/navigation';
 import {
   mergeForm,
   useForm,
@@ -11,20 +11,35 @@ import {
   useTransform,
 } from '@tanstack/react-form';
 import someAction from './action';
-import { formOpts } from './shared-code';
 
-export const AmenitiesFormClient = () => {
+export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
   const [state, action] = useActionState(someAction, initialFormState);
+  const router = useRouter();
 
   const form = useForm({
-    ...formOpts,
+    defaultValues: {
+      name: amenity?.name ?? '',
+      id: amenity?.id != null ? Number(amenity.id) : 0,
+    },
     transform: useTransform((baseForm) => mergeForm(baseForm, state), [state]),
+    register: (register) => {
+      register('id');
+    },
     onSubmit: async ({ formApi }) => {
-      formApi.reset();
+      if (!amenity?.id) {
+        formApi.reset();
+      }
     },
   });
 
   const formErrors = useStore(form.store, (formState) => formState.errors);
+
+  useEffect(() => {
+    if (state?.status === 'success') {
+      router.refresh();
+      onCloseModal?.();
+    }
+  }, [state, router, onCloseModal]);
 
   return (
     <form action={action} onSubmit={() => form.handleSubmit()}>
@@ -57,6 +72,19 @@ export const AmenitiesFormClient = () => {
           );
         }}
       </form.Field>
+      {amenity && (
+        <form.Field name="id">
+          {(field) => (
+            <input
+              type="hidden"
+              name="id"
+              value={field.state.value}
+              onChange={(e) => field.handleChange(Number(e.target.value))}
+            />
+          )}
+        </form.Field>
+      )}
+
       <form.Subscribe
         selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
       >

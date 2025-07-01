@@ -1,0 +1,27 @@
+.button,
+a.button {
+  font-family: $montserrat;
+  text-decoration: none;
+  display: block;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  width: max-content;
+  cursor: pointer;
+
+  transition: all 0.3s ease-in;
+
+  &.purple {
+    background-color: $purple;
+    color: $white;
+  }
+
+  &.pink {
+    background-color: $pink;
+    color: $white;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem) scale(1.05);
+  }
+}
