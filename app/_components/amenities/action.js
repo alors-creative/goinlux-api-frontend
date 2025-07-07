@@ -23,8 +23,6 @@ export default async function someAction(prev, formData) {
     const id = Number(validatedData.id);
     const isEdit = !isNaN(id) && id > 0;
 
-    console.log(isEdit);
-
     const url = isEdit
       ? `${process.env.NEXT_PUBLIC_GOINLUX_API}/amenities/${Number(
           validatedData?.id,

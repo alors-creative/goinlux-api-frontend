@@ -1,10 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function VillaFormClient({ amenities = [], locations = [] }) {
+export default function VillaEditFormClient({
+  villa,
+  amenities = [],
+  locations = [],
+}) {
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: '',
     beds: 0,
@@ -27,12 +32,31 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
   });
 
   const [selectedMainImageIndex, setSelectedMainImageIndex] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    if (villa) {
+      const photos = villa.photos?.map((p) => p.photo) || [];
+      setFormData({
+        ...villa,
+        photos,
+        rooms: villa.rooms?.map((room) => ({
+          room_name: room.room_name,
+          roomItems: room.roomItems?.map((i) => i.room_item) || [''],
+        })) || [{ room_name: '', roomItems: [''] }],
+        amenities:
+          villa.amenities
+            ?.map((a) => a?.amenity?.id)
+            .filter((id) => typeof id === 'number') || [],
+      });
+
+      const mainIndex = photos.findIndex((p) => p === villa.main_image);
+      setSelectedMainImageIndex(mainIndex >= 0 ? mainIndex : 0);
+    }
+  }, [villa]);
 
   const handleChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleAmenityToggle = (id) => {
@@ -48,10 +72,10 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
   };
 
   const handleMultipleUploads = async (files) => {
-    const preset = 'goinlux_preset'; // Replace with your actual preset
-    const cloudName = 'dzuj8vnrr'; // Replace with your actual Cloudinary name
+    const preset = 'goinlux_preset'; // 🔁 Replace with your Cloudinary preset
+    const cloudName = 'dzuj8vnrr'; // 🔁 Replace with your Cloudinary cloud name
 
-    const uploadedUrls = [];
+    setIsUploading(true);
 
     for (const file of files) {
       const form = new FormData();
@@ -69,7 +93,10 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
 
         const data = await res.json();
         if (data.secure_url) {
-          uploadedUrls.push(data.secure_url);
+          setFormData((prev) => ({
+            ...prev,
+            photos: [...prev.photos, data.secure_url],
+          }));
         } else {
           console.error('Upload failed:', data);
         }
@@ -78,10 +105,23 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
       }
     }
 
+    setIsUploading(false);
+  };
+
+  const handleDeletePhoto = (index) => {
+    const updatedPhotos = [...formData.photos];
+    updatedPhotos.splice(index, 1);
+
     setFormData((prev) => ({
       ...prev,
-      photos: [...prev.photos, ...uploadedUrls],
+      photos: updatedPhotos,
     }));
+
+    if (selectedMainImageIndex === index) {
+      setSelectedMainImageIndex(null);
+    } else if (selectedMainImageIndex > index) {
+      setSelectedMainImageIndex((prev) => prev - 1);
+    }
   };
 
   const handleRoomChange = (index, field, value) => {
@@ -115,62 +155,20 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
     handleChange('rooms', updated);
   };
 
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      beds: 0,
-      baths: 0,
-      max_capacity: 0,
-      main_image: '',
-      description: '',
-      starting_price: 0,
-      external_villa_id: '',
-      api_id: 1,
-      location_id: '',
-      amenities: [],
-      photos: [],
-      rooms: [
-        {
-          room_name: '',
-          roomItems: [''],
-        },
-      ],
-    });
-    setSelectedMainImageIndex(null);
-  };
-
-  const handleDeletePhoto = (index) => {
-    const updatedPhotos = [...formData.photos];
-    updatedPhotos.splice(index, 1);
-
-    setFormData((prev) => ({
-      ...prev,
-      photos: updatedPhotos,
-    }));
-
-    // Adjust selected main image index if needed
-    if (selectedMainImageIndex === index) {
-      setSelectedMainImageIndex(null);
-    } else if (selectedMainImageIndex > index) {
-      setSelectedMainImageIndex((prev) => prev - 1);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const cleanedPhotos = formData.photos.filter(Boolean);
-    let mainImageUrl = cleanedPhotos[0] || '';
-    let reorderedPhotos = [...cleanedPhotos];
+    let mainImageUrl = formData.photos[0] || '';
+    let reorderedPhotos = [...formData.photos];
 
     if (
       selectedMainImageIndex !== null &&
-      cleanedPhotos[selectedMainImageIndex]
+      formData.photos[selectedMainImageIndex]
     ) {
-      mainImageUrl = cleanedPhotos[selectedMainImageIndex];
+      mainImageUrl = formData.photos[selectedMainImageIndex];
       reorderedPhotos = [
-        cleanedPhotos[selectedMainImageIndex],
-        ...cleanedPhotos.filter((_, i) => i !== selectedMainImageIndex),
+        formData.photos[selectedMainImageIndex],
+        ...formData.photos.filter((_, i) => i !== selectedMainImageIndex),
       ];
     }
 
@@ -194,25 +192,26 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
     };
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_GOINLUX_API}/villas`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_GOINLUX_API}/villas/${villa.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedData),
         },
-        body: JSON.stringify(formattedData),
-      });
+      );
 
       if (!res.ok) {
         const errorText = await res.text();
         throw new Error(`API error: ${res.status} - ${errorText}`);
       }
 
-      const newVilla = await res.json();
-      router.push(`/villas/${newVilla.id}`);
-      resetForm();
+      res.ok && router.push(`/villas/${villa.id}`);
     } catch (err) {
       console.error(err);
-      alert('There was an error creating the villa.');
+      alert('There was an error updating the villa.');
     }
   };
 
@@ -291,7 +290,7 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
         </label>
       ))}
 
-      <h4>Upload Photos</h4>
+      <h4>Photos</h4>
       <input
         type="file"
         accept="image/*"
@@ -301,6 +300,8 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
           if (files.length > 0) handleMultipleUploads(files);
         }}
       />
+
+      {isUploading && <p>Uploading images…</p>}
 
       {formData.photos.map((photo, i) => (
         <div key={i} style={{ marginBottom: '1rem' }}>
@@ -361,7 +362,7 @@ export default function VillaFormClient({ amenities = [], locations = [] }) {
         Add Room
       </button>
 
-      <button type="submit">Submit</button>
+      <button type="submit">Update Villa</button>
     </form>
   );
 }

@@ -22,7 +22,6 @@ const serverValidate = createServerValidate({
 export default async function someAction(prev, formData) {
   try {
     const validatedData = await serverValidate(formData);
-    console.log('validatedData', validatedData);
     // Persist the form data to the database
     // await sql`
     //   INSERT INTO users (name, email, password)
