@@ -7,5 +7,6 @@ export const formOpts = formOptions({
     location: '',
     tax_rate: 0,
     slug: '',
+    top_3_villas: [''],
   },
 });

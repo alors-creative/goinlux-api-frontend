@@ -4,6 +4,7 @@ import { getLocations } from '@/app/_lib/data-service';
 
 async function page() {
   const locations = await getLocations();
+  console.log(locations);
 
   return (
     <section>

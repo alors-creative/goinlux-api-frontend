@@ -22,6 +22,13 @@ export default async function someAction(prev, formData) {
     const id = Number(validatedData.id);
     const isEdit = !isNaN(id) && id > 0;
 
+    const rawTopVillas = validatedData.top_3_villas;
+
+    // Convert to array (preserves order by numeric keys)
+    const top_3_villas = Object.keys(rawTopVillas)
+      .sort((a, b) => Number(a) - Number(b))
+      .map((key) => rawTopVillas[key]);
+
     const url = isEdit
       ? `${process.env.NEXT_PUBLIC_GOINLUX_API}/locations/${Number(
           validatedData?.id,
@@ -39,6 +46,7 @@ export default async function someAction(prev, formData) {
         location: validatedData.location,
         slug: validatedData.slug,
         tax_rate: Number(validatedData.tax_rate),
+        top_3_villas: top_3_villas,
       }),
     });
 

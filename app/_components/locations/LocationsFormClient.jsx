@@ -22,6 +22,7 @@ export const LocationsFormClient = ({ location, onCloseModal }) => {
       location: location?.location ?? '',
       tax_rate: location?.tax_rate ?? 0,
       slug: location?.slug ?? '',
+      top_3_villas: location?.top_3_villas ?? ['', '', ''],
     },
     transform: useTransform((baseForm) => mergeForm(baseForm, state), [state]),
     register: (register) => {
@@ -128,6 +129,36 @@ export const LocationsFormClient = ({ location, onCloseModal }) => {
           )}
         </form.Field>
       )}
+
+      <h4>Top 3 Villas</h4>
+      <form.Field name="top_3_villas" mode="array">
+        {(fieldArray) => (
+          <div>
+            {/* Render exactly 3 inputs */}
+            {Array.from({ length: 3 }).map((_, i) => (
+              <form.Field key={i} name={`top_3_villas[${i}]`}>
+                {(field) => (
+                  <div>
+                    <input
+                      name={`top_3_villas[${i}]`}
+                      type="text"
+                      placeholder={`Top Villa ${i + 1}`}
+                      value={field.state.value || ''}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                    {/* show validation errors, if any */}
+                    {field.state.meta.errors.map((err) => (
+                      <p key={err} style={{ color: 'red' }}>
+                        {err}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </form.Field>
+            ))}
+          </div>
+        )}
+      </form.Field>
 
       <form.Subscribe
         selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
