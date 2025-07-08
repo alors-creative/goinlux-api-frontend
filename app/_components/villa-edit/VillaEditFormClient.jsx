@@ -264,20 +264,6 @@ export default function VillaEditFormClient({
         onChange={(e) => handleChange('description', e.target.value)}
       />
 
-      <input
-        type="number"
-        placeholder="Starting Price"
-        value={formData.starting_price}
-        onChange={(e) => handleChange('starting_price', e.target.value)}
-      />
-
-      <input
-        type="text"
-        placeholder="External Villa ID"
-        value={formData.external_villa_id}
-        onChange={(e) => handleChange('external_villa_id', e.target.value)}
-      />
-
       <h4>Amenities</h4>
       {amenities.map((a) => (
         <label key={a.id}>
