@@ -15,7 +15,7 @@ import '@/app/_styles/forms.scss';
 import styles from './amenities.module.scss';
 import FormButton from '@/app/_components/buttons/FormButton';
 
-export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
+export const AmenitiesFormClient = ({ amenity, onCloseModal, formType }) => {
   const [state, action] = useActionState(someAction, initialFormState);
   const router = useRouter();
 
@@ -48,7 +48,11 @@ export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
     <form
       action={action}
       onSubmit={() => form.handleSubmit()}
-      className={[styles.form, 'form'].join(' ')}
+      className={[
+        styles.form,
+        'form',
+        formType !== 'edit' ? styles.add : styles.edit,
+      ].join(' ')}
     >
       {formErrors.map((error) => (
         <p key={error}>{error}</p>
@@ -58,7 +62,9 @@ export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
         {(field) => {
           return (
             <div className="formGroup">
-              <label htmlFor="name">Add Amenity</label>
+              <label htmlFor="name">
+                {formType !== 'edit' ? 'Add Amenity' : 'Edit Amenity'}
+              </label>
               <input
                 name="name"
                 type="text"
@@ -93,6 +99,7 @@ export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
           <FormButton
             canSubmit={canSubmit}
             isSubmitting={isSubmitting}
+            isEdit={formType === 'edit' ? true : false}
             color="purple"
           />
         )}

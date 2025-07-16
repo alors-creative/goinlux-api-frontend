@@ -11,7 +11,7 @@ async function page() {
     <section>
       <h1>Amenities</h1>
       <div>
-        <AmenitiesForm />
+        <AmenitiesForm formType="create" />
       </div>
       <div className={styles.amenities}>
         <AmenitiesContext amenities={amenities} />

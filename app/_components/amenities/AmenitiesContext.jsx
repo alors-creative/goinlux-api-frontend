@@ -35,7 +35,7 @@ function AmenitiesContext({ amenities }) {
 
       <Modal.Window name="edit">
         {({ close, props }) => (
-          <AmenitiesForm amenity={props} onCloseModal={close} />
+          <AmenitiesForm amenity={props} onCloseModal={close} formType="edit" />
         )}
       </Modal.Window>
     </Modal>

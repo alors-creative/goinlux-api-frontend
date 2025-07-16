@@ -1,9 +1,13 @@
 import { AmenitiesFormClient } from '@/app/_components/amenities/AmenitiesFormClient';
 
-function AmenitiesForm({ amenity, onCloseModal }) {
+function AmenitiesForm({ amenity, onCloseModal, formType }) {
   return (
     <>
-      <AmenitiesFormClient amenity={amenity} onCloseModal={onCloseModal} />
+      <AmenitiesFormClient
+        amenity={amenity}
+        onCloseModal={onCloseModal}
+        formType={formType}
+      />
     </>
   );
 }

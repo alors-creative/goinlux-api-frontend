@@ -3,10 +3,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // background-color: var(--color-grey-0);
-  // border-radius: var(--border-radius-lg);
-  // box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  // width: 80lvw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  border-radius: 1rem;
+  box-shadow: 0px 0.5rem 0.5rem rgba(black, 0.3);
+  padding: 4rem 6rem 4rem 4rem;
   transition: all 0.5s;
 }
 
@@ -22,7 +27,8 @@
   transition: all 0.5s;
 }
 
-.button {
+.closeButton {
+  cursor: pointer;
   background: none;
   border: none;
   padding: 0.4rem;
@@ -31,7 +37,7 @@
   transition: all 0.2s;
   position: absolute;
   top: 1.2rem;
-  right: 1.9rem;
+  right: 1.2rem;
 
   &:hover {
     // background-color: var(--color-grey-100);
@@ -43,6 +49,6 @@
     /* Sometimes we need both */
     /* fill: var(--color-grey-500);
     stroke: var(--color-grey-500); */
-    color: var(--color-grey-500);
+    color: $pink;
   }
 }
