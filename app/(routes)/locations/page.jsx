@@ -1,6 +1,8 @@
 import LocationsContext from '@/app/_components/locations/LocationsContext';
 import LocationsForm from '@/app/_components/locations/LocationsForm';
 import { getLocations } from '@/app/_lib/data-service';
+import styles from './page.module.scss';
+import LocationAddContext from '@/app/_components/locations/LocationAddContext';
 
 async function page() {
   const locations = await getLocations();
@@ -9,11 +11,11 @@ async function page() {
   return (
     <section>
       <h1>Locations</h1>
-      <div className="locations">
-        <LocationsContext locations={locations} />
+      <div className={styles.addLocations}>
+        <LocationAddContext />
       </div>
-      <div className="addLocations">
-        <LocationsForm />
+      <div className={styles.locations}>
+        <LocationsContext locations={locations} />
       </div>
     </section>
   );
