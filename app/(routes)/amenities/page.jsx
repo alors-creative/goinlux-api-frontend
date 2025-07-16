@@ -2,6 +2,7 @@ import AmenitiesContext from '@/app/_components/amenities/AmenitiesContext';
 import AmenitiesForm from '@/app/_components/amenities/AmenitiesForm';
 import Modal from '@/app/_components/modal/Modal';
 import { getAmenities } from '@/app/_lib/data-service';
+import styles from './page.module.scss';
 
 async function page() {
   const amenities = await getAmenities();
@@ -12,7 +13,7 @@ async function page() {
       <div>
         <AmenitiesForm />
       </div>
-      <div className="amenities">
+      <div className={styles.amenities}>
         <AmenitiesContext amenities={amenities} />
       </div>
     </section>

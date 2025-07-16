@@ -2,7 +2,7 @@
 
 import { deleteVilla } from '@/app/_lib/data-service';
 import { useRouter } from 'next/navigation';
-import { MdDeleteForever } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 
 function DeleteButton({ deleteID }) {
   const router = useRouter();
@@ -13,7 +13,7 @@ function DeleteButton({ deleteID }) {
   };
   return (
     <button onClick={() => handleDelete(deleteID)}>
-      <MdDeleteForever />
+      <MdDelete />
     </button>
   );
 }

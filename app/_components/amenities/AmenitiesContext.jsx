@@ -1,13 +1,11 @@
 'use client';
 
 import AmenitiesForm from '@/app/_components/amenities/AmenitiesForm';
-import { AmenitiesFormClient } from '@/app/_components/amenities/AmenitiesFormClient';
-import LinkButton from '@/app/_components/buttons/LinkButton';
 import Modal from '@/app/_components/modal/Modal';
 import { deleteAmenity } from '@/app/_lib/data-service';
-import { FaEdit } from 'react-icons/fa';
-import { MdDeleteForever } from 'react-icons/md';
+import { MdDelete, MdEditSquare } from 'react-icons/md';
 import { useRouter } from 'next/navigation';
+import styles from './amenities.module.scss';
 
 function AmenitiesContext({ amenities }) {
   const router = useRouter();
@@ -20,14 +18,18 @@ function AmenitiesContext({ amenities }) {
   return (
     <Modal>
       {amenities.map((amenity) => (
-        <div key={amenity.id}>
+        <div key={amenity.id} className={styles.amenity}>
           <p>{amenity.name}</p>
-          <Modal.Open opens="edit" withProps={amenity}>
-            <FaEdit />
-          </Modal.Open>
-          <button onClick={() => handleDelete(amenity.id)}>
-            <MdDeleteForever />
-          </button>
+          <div className={styles.buttons}>
+            <Modal.Open opens="edit" withProps={amenity}>
+              <button>
+                <MdEditSquare />
+              </button>
+            </Modal.Open>
+            <button onClick={() => handleDelete(amenity.id)} className="delete">
+              <MdDelete />
+            </button>
+          </div>
         </div>
       ))}
 

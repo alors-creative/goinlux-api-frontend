@@ -1,0 +1,10 @@
+.amenities {
+  margin-top: 2rem;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  column-gap: 4rem;
+  row-gap: 4rem;
+}
