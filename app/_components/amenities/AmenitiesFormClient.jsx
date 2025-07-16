@@ -11,6 +11,9 @@ import {
   useTransform,
 } from '@tanstack/react-form';
 import someAction from './action';
+import '@/app/_styles/forms.scss';
+import styles from './amenities.module.scss';
+import FormButton from '@/app/_components/buttons/FormButton';
 
 export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
   const [state, action] = useActionState(someAction, initialFormState);
@@ -42,26 +45,24 @@ export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
   }, [state, router, onCloseModal]);
 
   return (
-    <form action={action} onSubmit={() => form.handleSubmit()}>
+    <form
+      action={action}
+      onSubmit={() => form.handleSubmit()}
+      className={[styles.form, 'form'].join(' ')}
+    >
       {formErrors.map((error) => (
         <p key={error}>{error}</p>
       ))}
 
-      <form.Field
-        name="name"
-        validators={{
-          onChange: ({ value }) =>
-            value < 1
-              ? 'Amenity needs to be more than one character'
-              : undefined,
-        }}
-      >
+      <form.Field name="name">
         {(field) => {
           return (
-            <div>
+            <div className="formGroup">
+              <label htmlFor="name">Add Amenity</label>
               <input
                 name="name"
                 type="text"
+                placeholder="Add Amenity"
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
               />
@@ -89,9 +90,11 @@ export const AmenitiesFormClient = ({ amenity, onCloseModal }) => {
         selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
       >
         {([canSubmit, isSubmitting]) => (
-          <button type="submit" disabled={!canSubmit}>
-            {isSubmitting ? '...' : 'Submit'}
-          </button>
+          <FormButton
+            canSubmit={canSubmit}
+            isSubmitting={isSubmitting}
+            color="purple"
+          />
         )}
       </form.Subscribe>
     </form>

@@ -9,11 +9,11 @@ async function page() {
   return (
     <section>
       <h1>Amenities</h1>
-      <div className="amenities">
-        <AmenitiesContext amenities={amenities} />
-      </div>
       <div>
         <AmenitiesForm />
+      </div>
+      <div className="amenities">
+        <AmenitiesContext amenities={amenities} />
       </div>
     </section>
   );
