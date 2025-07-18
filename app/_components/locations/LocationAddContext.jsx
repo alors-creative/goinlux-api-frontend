@@ -14,7 +14,7 @@ function LocationAddContext() {
       </Modal.Open>
 
       <Modal.Window name="add">
-        {({ close }) => <LocationsForm onCloseModal={close} />}
+        {({ close }) => <LocationsForm onCloseModal={close} formType="add" />}
       </Modal.Window>
     </Modal>
   );

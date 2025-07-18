@@ -1,11 +1,13 @@
 import { LocationsFormClient } from '@/app/_components/locations/LocationsFormClient';
 
-function LocationsForm({ location, onCloseModal }) {
+function LocationsForm({ location, onCloseModal, formType }) {
   return (
     <>
-      <div>
-        <LocationsFormClient location={location} onCloseModal={onCloseModal} />
-      </div>
+      <LocationsFormClient
+        location={location}
+        onCloseModal={onCloseModal}
+        formType={formType}
+      />
     </>
   );
 }

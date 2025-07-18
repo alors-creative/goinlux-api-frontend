@@ -40,7 +40,11 @@ function LocationsContext({ locations }) {
 
       <Modal.Window name="edit">
         {({ close, props }) => (
-          <LocationsForm location={props} onCloseModal={close} />
+          <LocationsForm
+            location={props}
+            onCloseModal={close}
+            formType="edit"
+          />
         )}
       </Modal.Window>
     </Modal>
