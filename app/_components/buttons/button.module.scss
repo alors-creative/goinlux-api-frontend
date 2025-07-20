@@ -26,3 +26,23 @@ a.button {
     transform: translateY(-0.3rem) scale(1.05);
   }
 }
+
+.linkBtn {
+  font-family: $montserrat;
+  text-decoration: none;
+  display: block;
+  padding: 2rem 4rem 2rem 4rem;
+  font-size: 1.6rem;
+  width: max-content;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+
+  transition: all 0.3s ease-in;
+
+  &:hover,
+  &.activeBtn {
+    background-color: $pink;
+    color: $white;
+  }
+}
