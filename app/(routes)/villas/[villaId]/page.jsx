@@ -60,18 +60,20 @@ async function page({ params }) {
         </ul>
 
         <h2>Room Breakdown</h2>
-        <ul>
-          {villa?.rooms?.map((room) => (
-            <div key={`roomBreakdown--${room.id}`}>
-              <li>{room.room_name}</li>
-              <ul className={styles.secondLevel}>
-                {room?.roomItems?.map((item) => (
-                  <li key={`roomItem--${item.id}`}>{item.room_item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </ul>
+        {villa?.rooms && (
+          <ul>
+            {villa?.rooms?.map((room) => (
+              <div key={`roomBreakdown--${room.id}`}>
+                <li>{room.room_name}</li>
+                <ul className={styles.secondLevel}>
+                  {room?.roomItems?.map((item) => (
+                    <li key={`roomItem--${item.id}`}>{item.room_item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </ul>
+        )}
 
         <h2>Photos</h2>
         <div className={styles.images}>
