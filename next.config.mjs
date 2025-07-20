@@ -19,6 +19,14 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'app/_styles')],
     additionalData: `@use "variables" as *;`, // Or `@import "variables";` for legacy
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
