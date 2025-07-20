@@ -1,5 +1,6 @@
 .button,
-a.button {
+a.button,
+a.button:visited {
   font-family: $montserrat;
   text-decoration: none;
   display: block;
@@ -27,7 +28,8 @@ a.button {
   }
 }
 
-.linkBtn {
+.linkBtn,
+.linkBtn:visited {
   font-family: $montserrat;
   text-decoration: none;
   display: block;
