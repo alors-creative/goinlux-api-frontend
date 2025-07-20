@@ -6,7 +6,6 @@ import LocationAddContext from '@/app/_components/locations/LocationAddContext';
 
 async function page() {
   const locations = await getLocations();
-  console.log(locations);
 
   return (
     <section>

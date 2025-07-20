@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 
 function Sidebar() {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <aside className={styles.sidebar}>

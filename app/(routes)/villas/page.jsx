@@ -15,9 +15,7 @@ async function page() {
         </LinkButton>
       </div>
       <div className={styles.villas}>
-        {villas.map((v) => (
-          <Card villa={v} key={v.id} />
-        ))}
+        {villas && villas?.map((v) => <Card villa={v} key={v.id} />)}
       </div>
     </section>
   );
