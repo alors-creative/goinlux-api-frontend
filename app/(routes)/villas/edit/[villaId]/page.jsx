@@ -1,4 +1,4 @@
-import VillaEditForm from '@/app/_components/villa-edit/VillaEditForm';
+import VillaEditForm from '@/app/_components/villas/villa-edit/VillaEditForm';
 import { getAmenities, getLocations, getVilla } from '@/app/_lib/data-service';
 
 async function page({ params }) {

@@ -1,4 +1,4 @@
-import VillaForm from '@/app/_components/villa-create/VillaForm';
+import VillaForm from '@/app/_components/villas/villa-create/VillaForm';
 import { getAmenities, getLocations } from '@/app/_lib/data-service';
 
 async function page() {

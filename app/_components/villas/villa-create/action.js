@@ -1,6 +1,6 @@
 'use server';
 
-import { formOpts } from '@/app/_components/villa-create/shared-code';
+import { formOpts } from '@/app/_components/villas/villa-create/shared-code';
 import {
   ServerValidateError,
   createServerValidate,

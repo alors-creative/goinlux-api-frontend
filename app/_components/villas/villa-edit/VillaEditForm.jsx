@@ -1,9 +1,9 @@
-import VillaEditFormClient from '@/app/_components/villa-edit/VillaEditFormClient';
+import VillaEditFormClient from '@/app/_components/villas/villa-edit/VillaEditFormClient';
+import styles from '@/app/_components/villas/villaForms.module.scss';
 
 function VillaEditForm({ villa, locations, amenities }) {
   return (
-    <div>
-      <h1>Villa Form</h1>
+    <div className={styles.formContainer}>
       <VillaEditFormClient
         villa={villa}
         locations={locations}

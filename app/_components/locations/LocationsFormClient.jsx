@@ -11,6 +11,7 @@ import {
   useTransform,
 } from '@tanstack/react-form';
 import someAction from './action';
+import '@/app/_styles/forms.scss';
 import styles from './locations.module.scss';
 import FormButton from '@/app/_components/buttons/FormButton';
 

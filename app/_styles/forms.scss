@@ -4,6 +4,7 @@
   // justify-content: space-between;
   // // column-gap: 4rem;
   // align-items: center;
+  // background-color: red;
 }
 
 .formGroup {
@@ -14,7 +15,7 @@
     font-size: 1.6rem;
     order: 2;
     margin: 0.5rem 1rem;
-    color: $purple;
+    color: $pink;
   }
 
   select {
@@ -26,23 +27,27 @@
     background-size: 18px;
     background-position: calc(100% - 3px) 50%;
     background-repeat: no-repeat;
-    background-color: $pink;
+    background-color: $white;
+    outline: $pink;
   }
 
-  input,
-  select {
+  input:not([type*='checkbox'], [type*='file']),
+  select,
+  textarea {
     border: 1px solid $pink;
     font-family: inherit;
     font-size: 1.6rem;
     padding: 1rem;
     border-radius: 0.5rem;
     width: 100%;
-    color: $pink;
+    color: $purple;
+
+    &::placeholder {
+      color: $purple;
+    }
   }
 
-  select {
-    border-right: 1.6rem solid transparent;
-    border-left: 1.6rem solid transparent;
-    text-align: center;
+  textarea {
+    resize: none;
   }
 }

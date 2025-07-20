@@ -1,0 +1,170 @@
+.formContainer {
+  width: 65lvw;
+}
+
+.form {
+  margin-top: 2rem;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .limits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 4rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+    color: $purple;
+    margin-bottom: 1rem;
+  }
+
+  .amenities {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .formGroup {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    justify-content: flex-start;
+
+    label {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+  }
+
+  input[type*='checkbox'],
+  input[type*='radio'] {
+    order: 1;
+    display: inline-block;
+    align-self: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  input[type*='radio'] {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .photos {
+    margin-bottom: 1.5rem;
+  }
+
+  input[type*='file'] {
+    font-size: 1.8rem;
+    color: $purple;
+
+    &::file-selector-button {
+      font-family: $montserrat;
+      text-decoration: none;
+      display: inline-block;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 1.3rem;
+      width: max-content;
+      border: none;
+      cursor: pointer;
+      margin-right: 1rem;
+
+      transition: all 0.3s ease-in;
+
+      background-color: $pink;
+      color: $white;
+    }
+  }
+
+  .uploading {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    color: $pink;
+  }
+
+  .loadedPhotos {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+  }
+
+  button {
+    cursor: pointer;
+    background-color: $purple;
+    border: none;
+    font-size: 1.6rem;
+    color: $white;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: max-content;
+  }
+
+  .deleteBtn {
+    margin-top: 0.5rem;
+    background-color: #ab3428;
+    color: $white;
+  }
+
+  .rooms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 4rem;
+  }
+
+  h5 {
+    font-size: 1.8rem;
+    color: $pink;
+    margin-bottom: 1rem;
+  }
+
+  .room {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+  }
+
+  .addBtn {
+    background-color: $pink;
+    color: $white;
+    margin-top: 1.5rem;
+
+    &.posA {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  .submitBtn {
+    margin-top: 2rem;
+  }
+
+  .container {
+    display: flex;
+    column-gap: 1rem;
+    align-items: stretch;
+
+    .deleteBtn {
+      padding: 1.5rem;
+      width: max-content;
+      margin: 0;
+    }
+  }
+}
