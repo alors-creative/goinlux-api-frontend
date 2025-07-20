@@ -4,6 +4,7 @@ export async function getAmenities() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/amenities/self-added`,
       {
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -21,6 +22,7 @@ export async function deleteAmenity(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/amenities/${Number(id)}`,
       {
+        cache: 'no-store',
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -40,6 +42,7 @@ export async function getLocations() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/locations`,
       {
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -57,6 +60,7 @@ export async function deleteLocation(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/locations/${Number(id)}`,
       {
+        cache: 'no-store',
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -76,6 +80,7 @@ export async function getVillas() {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/villas/api/1`,
       {
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -93,6 +98,7 @@ export async function getVilla(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/villas/${id}`,
       {
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -110,6 +116,7 @@ export async function deleteVilla(id) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_GOINLUX_API}/villas/${Number(id)}`,
       {
+        cache: 'no-store',
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

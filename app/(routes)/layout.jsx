@@ -3,6 +3,8 @@ import '@/app/_styles/globals.scss';
 import Sidebar from '@/app/_components/sidebar/Sidebar';
 import styles from '@/app/(routes)/layout.module.scss';
 
+export const dynamic = 'force-dynamic';
+
 const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
