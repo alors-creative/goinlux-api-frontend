@@ -1,0 +1,16 @@
+.header {
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  a {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.villas {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

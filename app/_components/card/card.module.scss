@@ -1,0 +1,51 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  h3 {
+    font-size: 2rem;
+    color: $pink;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: $purple;
+  }
+
+  .cardImage {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    width: 20rem;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  .cardInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .buttons {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    column-gap: 0.5rem;
+  }
+
+  .deleteBtn {
+    cursor: pointer;
+    border: none;
+    font-size: 1.6rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: max-content;
+    background-color: #ab3428;
+    color: $white;
+  }
+}
